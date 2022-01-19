@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const ProductComponent = () => {
-
+const ProductComponent = (props) => {
+    
+    const {products, setProducts} = props;
+    
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState("");
@@ -16,6 +18,7 @@ const ProductComponent = () => {
         axios.post("http://localhost:8000/api/products", {title, price, description})
             .then((res) => {
                 console.log(res.data);
+                setProducts([...products, res.data]);
             })
             .catch((err) => {
                 console.log(err);
