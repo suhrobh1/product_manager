@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const DisplayAll = (props) => {
 
-    const {products, setProducts} = props;
+    const {deleteHandler, products, setProducts} = props;
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/products`)
@@ -18,14 +18,14 @@ const DisplayAll = (props) => {
             })
         }, [])
 
-        const deleteHandler = (idBelow) =>{
-            axios.delete(`http://localhost:8000/api/products/${idBelow}`)
-                .then((res) =>{
-                    console.log(res)
-                    setProducts(products.filter((product) => product._id != idBelow))
-                })
-                .catch((err) => console.log(err))
-        }
+        // const deleteHandler = (idBelow) =>{
+        //     axios.delete(`http://localhost:8000/api/products/${idBelow}`)
+        //         .then((res) =>{
+        //             console.log(res)
+        //             setProducts(products.filter((product) => product._id != idBelow))
+        //         })
+        //         .catch((err) => console.log(err))
+        // }
 
     return(
         <div className=' d-flex flex-column align-items-center mx-auto'>

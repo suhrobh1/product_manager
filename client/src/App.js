@@ -14,7 +14,7 @@ function App() {
         <Home path = "/" />
         <DisplayOne path = "/products/:id"/> 
         <Update path = "/products/update/:id"/>
-        <UpdateSubmitFeedback path = "/products/update/submit/:id"/>
+        <UpdateSubmitFeedback path = "/products/update/submit/:id" />
       </Router>
     </div>
   );

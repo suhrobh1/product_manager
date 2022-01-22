@@ -20,13 +20,14 @@ const Update = (props) => {
                 setDescription(res.data.description);
             })
             .catch((err) => console.log(err));
-    }, [])
+    }, [id])
 
     const updateHandler = (e) => {
         e.preventDefault();
         axios.put(`http://localhost:8000/api/products/${id}`, {title, price, description})
             .then((res) => console.log(res))
             .catch((err) => console.log(err))
+
         nav(`/products/update/submit/${id}`, {replace:true})
     }
 
