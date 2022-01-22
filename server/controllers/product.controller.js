@@ -1,7 +1,5 @@
 const Product = require('../models/product.model');
-
 module.exports ={
-
     createProduct: (req, res) => {
         Product.create(req.body)
             .then((newProduct) => {
@@ -13,7 +11,6 @@ module.exports ={
                 console.log("Problem in createProduct")
             })
     },
-
     findAllProducts: (req, res) =>{
         Product.find()
             .then((allProducts) =>{
@@ -25,7 +22,6 @@ module.exports ={
                 console.log("Find all products failed!")
             })
     },
-
     findOneProduct:(req, res) => {
         Product.findOne({_id: req.params.id})
             .then((oneProduct) => {
@@ -37,19 +33,17 @@ module.exports ={
                 console.log("Find for the product failed!");
             })
     },
-
     updateProduct: (req, res) =>{
-        Product.updateOne({_id: req.params.id}, req.body, {new: true, runValidators: true})
+        Product.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, runValidators: true})
             .then((updatedProduct)=> {
                 res.json(updatedProduct);
                 console.log(updatedProduct);
             })
             .catch((err) => {
-                res.status(400).jason(err);
+                res.status(400).json(err);
                 console.log("Problem in updateProduct.");
             })
     },
-
     deleteProduct: (req, res) => {
         Product.deleteOne({_id: req.params.id})
             .then((oneProduct) => {
