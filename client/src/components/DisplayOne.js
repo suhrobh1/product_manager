@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import './DisplayOne.css';
-import { useNavigate } from '@reach/router';
-
+import { navigate} from '@reach/router';
+import Delete from './Delete';
 
 
 const DisplayOne = (props) =>{
 
     const [product, setProduct] = useState({});
-    let nav = useNavigate();
+    const [qty, setQty] =useState(0);
     const {id} = props;
 
 
@@ -24,22 +24,18 @@ const DisplayOne = (props) =>{
             })
     }, [id])
 
-    const deleteHandler = (idBelow) =>{
-        axios.delete(`http://localhost:8000/api/products/${idBelow}`)
-            .then((res) =>{
-                console.log(res)
-            })
-            .catch((err) => console.log(err))
-            nav(`/`, {replace:true})
-    }
-
     return(
 
         <div className='main'>
             <p className = 'title'>{product.title}</p>
             <p>Price: ${product.price}</p>
             <p>Description: {product.description}</p>
-            <button onClick={(e) => deleteHandler(product._id)}> Delete</button>
+            {/* <div style={{display: "flex", flexDirection: "row", width: "10em",justifyContent: "space-between", alignItems:"middle"}}>
+                <div>In stock: {qty}</div>
+                <button onClick={()=>setQty(qty + 1)}>Add 1</button>
+            </div> */}
+            
+            <Delete productId = {product._id} successCallback = {()=> navigate('/')} />
         </div>
     )
 }

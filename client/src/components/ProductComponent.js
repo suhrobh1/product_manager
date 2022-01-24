@@ -6,23 +6,23 @@ import Button from 'react-bootstrap/Button'
 
 const ProductComponent = (props) => {
     
-    const {products, setProducts} = props;
+    const {initialTitle, initialPrice, initialDescription, onSubmitProp} = props;
     
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState(initialTitle); 
+    const [price, setPrice] = useState(initialPrice);
+    const [description, setDescription] = useState(initialDescription);
 
     const submitHandler = (e) =>{
         e.preventDefault();
-
-        axios.post("http://localhost:8000/api/products", {title, price, description})
-            .then((res) => {
-                console.log(res.data);
-                setProducts([...products, res.data]);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        onSubmitProp({title, price, description});
+        // axios.post("http://localhost:8000/api/products", {title, price, description})
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         setProducts([...products, res.data]);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
             setTitle("");
             setPrice("");
             setDescription("");
@@ -54,7 +54,7 @@ const ProductComponent = (props) => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className='bg-light w-25 text-black border border-light' >
-                    Create
+                    Submit
                 </Button>
             </Form>
 
